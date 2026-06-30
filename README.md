@@ -1,56 +1,42 @@
-# Quiz PythonGPT
+# PythonGPT Quiz
+Terminal-based multiple-choice quiz with AI-generated questions on a topic of your choice.
 
-Quiz de múltipla escolha no terminal, com perguntas geradas por IA sobre o assunto que você escolher.
+## What it does
+- You provide a **topic** (e.g., Python, history, networking)
+- Choose the difficulty: **Easy**, **Medium**, or **Hard**
+- OpenAI generates a question with 4 answer choices
+- Correct answer: +1 point | Wrong answer: -1 point (if you already have points)
+- At the end, it shows a summary of your performance
 
-## O que faz
-
-- Você informa um **tópico** (ex: Python, história, redes)
-- Escolhe a dificuldade: **Fácil**, **Médio** ou **Difícil**
-- A OpenAI gera uma pergunta com 4 alternativas
-- Acertou: +1 ponto | Errou: -1 ponto (se já tiver pontos)
-- No final, mostra um resumo do seu desempenho
-
-## Como usar
-
-1. Instale as dependências:
-
+## How to use
+1. Install the dependencies:
 ```bash
 pip install openai rich python-dotenv
 ```
-
-2. Crie um arquivo `.env` na raiz do projeto:
-
+2. Create a `.env` file in the project root:
 ```env
-OPENAI_API_KEY=sua_chave_aqui
+OPENAI_API_KEY=your_key_here
 ```
-
-3. Execute:
-
+3. Run it:
 ```bash
 python quiz-gpt.py
 ```
 
-## Exemplo no terminal
-
+## Terminal example
 ```
-Bem Vindo ao Quiz PythonGPT!
-
-Qual tópico você gostaria de estudar hoje?: Python
-Qual nível de dificuldade? [Fácil/Médio/Difícil] (Médio): Médio
-
-Qual estrutura cria um dicionário em Python?
+Welcome to PythonGPT Quiz!
+What topic would you like to study today?: Python
+What difficulty level? [Easy/Medium/Hard] (Medium): Medium
+Which structure creates a dictionary in Python?
 1. []
 2. ()
 3. {}
 4. <>
-
-Qual é a sua resposta? [1/2/3/4]: 3
-
-Parabéns! Você acertou!
+What is your answer? [1/2/3/4]: 3
+Congratulations! You got it right!
 ```
 
-## Tecnologias
-
+## Technologies
 - Python
 - OpenAI API
-- Rich (interface no terminal)
+- Rich (terminal interface)
