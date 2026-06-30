@@ -1,12 +1,8 @@
-from typing import Any
-
-
 import json
 from rich.console import Console
 from rich.prompt import Prompt
+from openai import OpenAI
 
-
-console = Console()
 GREETIING_TITLE = "Bem Vindo ao [bold blue]Quiz PythonGPT![/bold blue]"
 PRESS_ENTER_MESSAGE = "Pressione ENTER para continuar..."
 MOCK_QUEST = {
@@ -18,6 +14,10 @@ MOCK_QUEST = {
   "answer": "Sim"
 }
 
+console = Console()
+GPT_KEY=OpenAI(
+  api_key=""
+)
 
 def show_greeting(): 
   console.clear()
@@ -31,6 +31,14 @@ def press_enter_to_continue():
   )
 
 
+def ask_continue_playing():
+  return Prompt.ask(
+      prompt="Deseja continuar jogando?",
+      choices=["Sim", "Não"],
+      default="Sim"
+    )
+
+
 def create_question(topic):
     quest = json.dumps(MOCK_QUEST)
     return json.loads(quest)
@@ -41,7 +49,6 @@ def validate_answer(user_points, user_answer, answer):
       user_points += 1
       console.print("[bold green]Parabéns! Você acertou![/bold green]")
       console.print(f"[bold yellow] Você tem {user_points} pontos![/bold yellow]")
-      return user_points
   else:
       console.print("[bold red]Que pena! Você errou![/bold red]")
       console.print(f"A resposta certa é: [bold yellow]{answer}![/bold yellow]")
@@ -56,7 +63,6 @@ def generate_quiz():
     question_created = create_question(user_topic)
     choices_created = question_created['choices']
     answer_created = question_created['answer']
-
     valid_choices = [str(i + 1) for i in range(len(choices_created))]
 
     console.print(f"[bold green]{question_created['text']}[/bold green]")
@@ -68,15 +74,9 @@ def generate_quiz():
     user_answer = choices_created[user_answer_index]
 
     console.clear()
-    validate_answer(user_points,user_answer,answer_created)
+    validate_answer(user_points, user_answer, answer_created)
+    user_answer = ask_continue_playing()
 
-    user_answer = Prompt.ask(
-      prompt="Deseja continuar jogando?",
-      choices=["Sim", "Não"],
-      default="Sim"
-    )
-
-  console.print(user_topic)
 
 def main():
   show_greeting()
